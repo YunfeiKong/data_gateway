@@ -9,7 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowUpDown, Database, Filter, Link, Plus, AlertCircle, BarChart } from "lucide-react"
-import { FlowView, useNodesState  } from '@ant-design/pro-flow';
+import { FlowView, useNodesState, FlowEditor, FlowEditorProvider, FlowPanel } from '@ant-design/pro-flow';
+
+import { BtnGroup } from './btnGroup';
+import useStyles from './css/probase';
 import {
   Dialog,
   DialogContent,
@@ -44,6 +47,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
+import { EditorNode } from './editorNode'
 
 
 export function DashboardComponent() {
@@ -90,7 +94,7 @@ export function DashboardComponent() {
       setProcessedDataCount(prev => (prev + Math.floor(Math.random() * 5)) % 1000)
       setFilteredDataCount(prev => (prev + Math.floor(Math.random() * 2)) % 500)
       setBlockchainTransactions(prev => (prev + Math.floor(Math.random() * 1)) % 200)
-      
+
       // Update blockchain stats
       setBlockchainStats(prev => ({
         sensor: {
@@ -135,7 +139,7 @@ export function DashboardComponent() {
   const handleGradeChange = (sourceType, index, newGrade) => {
     setDataSources(prev => ({
       ...prev,
-      [sourceType]: prev[sourceType].map((item, i) => 
+      [sourceType]: prev[sourceType].map((item, i) =>
         i === index ? { ...item, grade: newGrade } : item
       )
     }))
@@ -235,55 +239,29 @@ export function DashboardComponent() {
   )
 
 
-  const _nodes = [
-    {
-      id: 'a1',
-      data: {
-        title: 'XXX_API_a1',
-        logo: 'https://mdn.alipayobjects.com/huamei_ntgeqc/afts/img/A*kgyiRKi04eUAAAAAAAAAAAAADvuvAQ/original',
-        description: 'XXX_XXX_XXX_API',
-      },
-    },
-    {
-      id: 'a2',
-      data: {
-        title: 'XXX_API_a2',
-        logo: 'https://mdn.alipayobjects.com/huamei_ntgeqc/afts/img/A*kgyiRKi04eUAAAAAAAAAAAAADvuvAQ/original',
-        description: 'XXX_XXX_XXX_API',
-      },
-    },
-    {
-      id: 'a3',
-      data: {
-        title: 'XXX_API_a3',
-        logo: 'https://mdn.alipayobjects.com/huamei_ntgeqc/afts/img/A*kgyiRKi04eUAAAAAAAAAAAAADvuvAQ/original',
-        description: 'XXX_XXX_XXX_API',
-      },
-    },
-  ];
-  const edges = [
-    {
-      id: 'a1-a2',
-      source: 'a1',
-      target: 'a2',
-    },
-    {
-      id: 'a1-a3',
-      source: 'a1',
-      target: 'a3',
-      type: 'radius',
-    },
-  ];
-  const [nodes, , onNodesChange] = useNodesState(_nodes);
-const renderDataProcessFlowTab = () => (
-  
-<div style={ {width: '100%',height: '600px'}}>
-  <FlowView nodes={nodes} edges={edges} onNodesChange={onNodesChange}/>
-</div>
-)
+  const ProFlowDemo = () => {
+    const { styles } = useStyles();
+
+    return (
+      <div className={styles.container}>
+        <FlowEditor nodeTypes={{ EditorNode }} miniMap={false} devtools={true}>
+          <FlowPanel position="top-center">
+            <BtnGroup />
+          </FlowPanel>
+        </FlowEditor>
+      </div>
+    );
+  };
+  const renderDataProcessFlowTab = () => {
+    return (
+      <FlowEditorProvider>
+        <ProFlowDemo />
+      </FlowEditorProvider>
+    );
+  };
 
 
-const renderDataGradingTab = () => (
+  const renderDataGradingTab = () => (
     <Card>
       <CardHeader>
         <CardTitle>数据分级</CardTitle>
@@ -415,7 +393,7 @@ const renderDataGradingTab = () => (
               <CardTitle>{type === 'sensor' ? '传感器' : type === 'thirdParty' ? '第三方系统' : '数据库'}</CardTitle>
             </CardHeader>
             <CardContent>
-              
+
               <div className="text-2xl font-bold mb-2">{stats.total}</div>
               <Progress value={(stats.lastDay / stats.total) * 100} className="w-full" />
               <div className="mt-2">最近24小时: {stats.lastDay}</div>
@@ -437,7 +415,7 @@ const renderDataGradingTab = () => (
               </span>
             </div>
             <div className="flex space-x-4">
-            <Toaster />
+              <Toaster />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost">数据接入</Button>
