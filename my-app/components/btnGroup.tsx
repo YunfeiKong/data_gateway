@@ -1,6 +1,6 @@
 import { useFlowEditor } from '@ant-design/pro-flow';
 import { useCallback, useEffect, useState } from 'react';
-import { Button } from './ui/button';
+import { Button } from 'antd';
 
 export const BtnGroup = () => {
   const editor = useFlowEditor();
@@ -29,7 +29,7 @@ export const BtnGroup = () => {
 
   useEffect(() => {
     if (editor) {
-      addMockNode();
+    //   addMockNode();
     }
   }, []);
 
@@ -50,7 +50,7 @@ export const BtnGroup = () => {
         取消全选
       </Button>
       <br />
-      <Button onClick={addMockNode}>新增节点</Button>
+      {/* <Button onClick={addMockNode}>新增节点</Button> */}
       <Button
         onClick={() => {
           editor.getSelectedKeys().forEach((id) => {

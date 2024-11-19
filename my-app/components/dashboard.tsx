@@ -10,9 +10,8 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowUpDown, Database, Filter, Link, Plus, AlertCircle, BarChart } from "lucide-react"
 import { FlowView, useNodesState, FlowEditor, FlowEditorProvider, FlowPanel } from '@ant-design/pro-flow';
+import FlowDemo from './drag'
 
-import { BtnGroup } from './btnGroup';
-import useStyles from './css/probase';
 import {
   Dialog,
   DialogContent,
@@ -239,23 +238,10 @@ export function DashboardComponent() {
   )
 
 
-  const ProFlowDemo = () => {
-    const { styles } = useStyles();
-
-    return (
-      <div className={styles.container}>
-        <FlowEditor nodeTypes={{ EditorNode }} miniMap={false} devtools={true}>
-          <FlowPanel position="top-center">
-            <BtnGroup />
-          </FlowPanel>
-        </FlowEditor>
-      </div>
-    );
-  };
   const renderDataProcessFlowTab = () => {
     return (
       <FlowEditorProvider>
-        <ProFlowDemo />
+        <FlowDemo />
       </FlowEditorProvider>
     );
   };

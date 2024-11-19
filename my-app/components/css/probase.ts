@@ -21,6 +21,16 @@ const useStyles = createStyles(() => {
       editNode: {
         width: '400px',
       },
+      button: {
+        width: '100px',
+        height: '30px',
+        lineHeight: '24px',
+        boxSizing: 'border-box',
+        textAlign: 'center',
+        userSelect: 'none',
+        marginRight: '10px',
+        marginTop: '10px',
+      },
   };
 });
 export default useStyles;
