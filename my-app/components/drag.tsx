@@ -13,12 +13,13 @@ import {
   import Sidebar from './sidebar';
   import { BtnGroup } from './btnGroup';
   import { StringRender } from './stringNode';
+  import { EditorNode } from './editorNode';
   let id = 0;
   const getId = () => `node_${id++}`;
   
   const nodeTypes = {
     StringNode: StringRender,
-    EditNode: EditNode,
+    EditNode: EditorNode,
   };
   const ProFlowDemo = () => {
     const editor = useFlowEditor();
@@ -31,6 +32,7 @@ import {
     }, []);
   
     const onDrop = useCallback(
+      
       (event) => {
         event.preventDefault();
         if (!editor) return;
@@ -61,18 +63,7 @@ import {
       },
       [editor],
     );
-  
-    useEffect(() => {
-      editor.addNode({
-        id: 'a1',
-        type: 'EditNode',
-        position: { x: 200, y: 100 },
-        data: {
-          title: '123',
-          aaa: '456',
-        },
-      });
-    }, [editor]);
+
   
     return (
       <div className={styles.container}>

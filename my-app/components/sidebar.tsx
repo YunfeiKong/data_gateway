@@ -1,4 +1,5 @@
 import useStyles from './css/sidebar.style';
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 export default () => {
   const { styles, cx } = useStyles();
@@ -16,10 +17,24 @@ export default () => {
         onDragStart={(event) => onDragStart(event, 'StringNode')}
         draggable
       >
-        String Node
+        传感器
       </div>
       <div
-        className={cx(styles.dndnode, styles.output)}
+        className={cx(styles.dndnode, styles.input)}
+        onDragStart={(event) => onDragStart(event, 'StringNode')}
+        draggable
+      >
+        第三方系统
+      </div>
+      <div
+        className={cx(styles.dndnode, styles.input)}
+        onDragStart={(event) => onDragStart(event, 'StringNode')}
+        draggable
+      >
+        数据库
+      </div>
+      <div
+        className={cx(styles.dndnode, styles.input)}
         onDragStart={(event) => onDragStart(event, 'EditNode')}
         draggable
       >

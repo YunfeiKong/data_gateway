@@ -37,6 +37,7 @@ const useStyles = createStyles(() => {
     },
     selectall: {
       marginTop: '10px',
+      border: '1px solid #007bff',
     },
   };
 });

@@ -1,4 +1,4 @@
-import { EditNode, Handle, Position } from '@ant-design/pro-flow';
+import { EditNode, Handle, Position, NodeField ,TextArea  } from '@ant-design/pro-flow';
 import { FC } from 'react';
 import useStyles from './css/probase';
   
@@ -14,7 +14,14 @@ export const EditorNode: FC = (node: any) => {
         position={Position.Left}
       />
 
-      <EditNode.Preview title={'输出'}></EditNode.Preview>
+      <EditNode.Preview title={'数据选择'}>
+      <NodeField id={'sourceId'} title={'变量名'}>
+          <TextArea placeholder={'输入数据源'} type={'block'} value = {node.content} />
+        </NodeField>
+        {/* <NodeField id={'sourceId'} title={'数据来源'}>
+          来源
+        </NodeField> */}
+      </EditNode.Preview>
 
       <Handle
         id={typeof handles?.source === 'string' ? handles?.source : id}

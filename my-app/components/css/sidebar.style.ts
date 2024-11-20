@@ -27,7 +27,7 @@ const useStyles = createStyles(() => {
         borderColor: '#0041d0',
     },
     output: {
-        borderColor: '#00ffd0',
+        borderColor: '#ff0072',
     },
     'dndnode.input': {
       borderColor: '#0041d0',
