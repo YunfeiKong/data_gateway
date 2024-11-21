@@ -14,9 +14,13 @@ import {
   import { BtnGroup } from './btnGroup';
   import { StringRender } from './stringNode';
   import { EditorNode } from './editorNode';
+import { Toaster } from './ui/toaster';
+import { useToast } from '@/hooks/use-toast';
   let id = 0;
-  const getId = () => `node_${id++}`;
+  const getId = () => `${id++}`;
   
+  
+
   const nodeTypes = {
     StringNode: StringRender,
     EditNode: EditorNode,
@@ -25,19 +29,19 @@ import {
     const editor = useFlowEditor();
     const { styles } = useStyles();
     const [open, setOpen] = useState(false);
-  
+    const [nodes, setNodes] = useState([])
     const onDragOver = useCallback((event) => {
       event.preventDefault();
       event.dataTransfer.dropEffect = 'move';
     }, []);
-  
+    const { toast } = useToast()
     const onDrop = useCallback(
       
       (event) => {
         event.preventDefault();
         if (!editor) return;
   
-        const type = event.dataTransfer.getData('application/reactflow');
+        const {type, value} = JSON.parse(event.dataTransfer.getData('application/reactflow'));
         if (typeof type === 'undefined' || !type) {
           return;
         }
@@ -50,23 +54,30 @@ import {
           id: getId(),
           type,
           position,
-          content: {
-            a: '123',
-          },
           data: {
             title: `${type} node`,
-            content: '123',
+            content: value,
           },
         };
-  
         editor.addNode(newNode);
+        setNodes((currentNodes) => [...currentNodes, newNode])
       },
       [editor],
     );
 
-  
+    const onSave = () => {
+      nodes.forEach(node => {
+        console.log(node.data.content);
+      })
+      toast({
+        variant: 'default',
+        title: "应用成功",
+        description: "数据处理方案已保存并应用",
+      })
+    }
     return (
       <div className={styles.container}>
+        <Toaster/>
         <FlowEditor
           nodeTypes={nodeTypes}
           flowProps={{
@@ -80,6 +91,7 @@ import {
           <FlowPanel position={'top-center'}>
             <Button onClick={() => setOpen(true)}>Open Nodes Inspector</Button>
             <BtnGroup></BtnGroup>
+            <Button onClick={() => onSave()}>保存方案</Button>
           </FlowPanel>
           <Inspector open={open} onClick={() => setOpen(false)}>
             <Sidebar />

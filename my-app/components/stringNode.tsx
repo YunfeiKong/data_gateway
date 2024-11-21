@@ -5,7 +5,8 @@ import useStyles from './css/probase';
 export const StringRender: FC = (node: any) => {
   const { handles, id, selected } = node;
   const { styles, cx } = useStyles();
-
+  console.log(node);
+  
   return (
     <div className={cx(styles.stringNode, selected && styles.selected)}>
       <Handle
@@ -13,7 +14,7 @@ export const StringRender: FC = (node: any) => {
         type={'target'}
         position={Position.Left}
       />
-      {`node_${id}`}
+      {`${node.data.content}`}
       <Handle
         id={typeof handles?.source === 'string' ? handles?.source : id}
         type={'source'}

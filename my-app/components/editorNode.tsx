@@ -14,10 +14,10 @@ export const EditorNode: FC = (node: any) => {
         position={Position.Left}
       />
 
-      <EditNode.Preview title={'数据选择'}>
-      <NodeField id={'sourceId'} title={'变量名'}>
+      <EditNode.Preview title={`${node.data.content}`}>
+      {/* <NodeField id={'sourceId'} title={'变量名'}>
           <TextArea placeholder={'输入数据源'} type={'block'} value = {node.content} />
-        </NodeField>
+        </NodeField> */}
         {/* <NodeField id={'sourceId'} title={'数据来源'}>
           来源
         </NodeField> */}

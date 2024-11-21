@@ -11,7 +11,7 @@ const useStyles = createStyles(() => {
         height: '50px',
         textAlign: 'center',
         backgroundColor: 'white',
-        border: '1px solid aqua',
+        border: '1px solid',
         borderRadius: '4px',
         lineHeight: '50px',
       },
@@ -19,7 +19,13 @@ const useStyles = createStyles(() => {
         border: '1px solid #007bff',
       },
       editNode: {
-        width: '400px',
+        width: '200px',
+        height: '50px',
+        textAlign: 'center',
+        backgroundColor: 'white',
+     
+        borderRadius: '4px',
+        lineHeight: '50px',
       },
       button: {
         width: '100px',
