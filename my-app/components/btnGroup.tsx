@@ -6,33 +6,6 @@ export const BtnGroup = () => {
   const editor = useFlowEditor();
   const [count, setCount] = useState(0);
 
-  const addMockNode = useCallback(() => {
-    if (editor) {
-      const id = Math.random();
-
-      editor.addNode({
-        id: `a${id}`,
-        type: 'EditorNode',
-        position: { x: count * 200, y: 100 },
-        data: {
-          title: 'Editor Node',
-          handles: {
-            source: 'a1-source',
-            target: 'a1-target',
-          },
-        },
-      });
-
-      setCount((c) => c + 1);
-    }
-  }, [editor, count]);
-
-  useEffect(() => {
-    if (editor) {
-    //   addMockNode();
-    }
-  }, []);
-
   return (
     <>
       <Button

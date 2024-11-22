@@ -46,8 +46,6 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
-import { EditorNode } from './editorNode'
-
 
 export function DashboardComponent() {
   const [dataSourceCount, setDataSourceCount] = useState(0)
@@ -430,7 +428,7 @@ export function DashboardComponent() {
               />
               <Button variant="ghost" onClick={() => setActiveTab("dataProcessFlow")}>数据处理</Button>
               <Button variant="ghost" onClick={() => setActiveTab("dataGrading")}>数据分级</Button>
-              <Button variant="ghost" onClick={() => setActiveTab("dataProcessing")}>fff</Button>
+              <Button variant="ghost" onClick={() => setActiveTab("dataProcessing")}>处理方案</Button>
               <Button variant="ghost" onClick={() => setActiveTab("blockchain")}>区块链</Button>
             </div>
           </div>
